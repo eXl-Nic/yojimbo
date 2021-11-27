@@ -5346,6 +5346,8 @@ namespace yojimbo
 
         const Address & GetAddress() const { return m_boundAddress; }
 
+        netcode_server_t* GetNetcodeServer() const { return m_server; }
+
     private:
 
         void TransmitPacketFunction( int clientIndex, uint16_t packetSequence, uint8_t * packetData, int packetBytes );
