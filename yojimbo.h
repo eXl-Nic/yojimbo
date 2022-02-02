@@ -5751,6 +5751,8 @@ namespace yojimbo
 
         void SendPackets();
 
+        bool PollPacket();
+
         void ReceivePackets();
 
         void AdvanceTime( double time );

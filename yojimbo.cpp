@@ -3279,6 +3279,23 @@ namespace yojimbo
         }
     }
 
+    bool Client::PollPacket()
+    {
+      if (!IsConnected())
+        return false;
+      yojimbo_assert(m_client);
+      
+      int packetBytes;
+      uint64_t packetSequence;
+      uint8_t* packetData = netcode_client_receive_packet(m_client, &packetBytes, &packetSequence);
+      if (!packetData)
+        return false;
+      reliable_endpoint_receive_packet(GetEndpoint(), packetData, packetBytes);
+      netcode_client_free_packet(m_client, packetData);
+
+      return true;
+    }
+
     void Client::AdvanceTime( double time )
     {
         BaseClient::AdvanceTime( time );
